@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "639667016935",
+    "firebase_url": "https://huemongous-727d2.firebaseio.com",
+    "project_id": "huemongous-727d2",
+    "storage_bucket": "huemongous-727d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639667016935:android:070ca1582073187f",
+        "android_client_info": {
+          "package_name": "com.example.kyle.huemongous"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639667016935-d6sanhec9q1ip45krhko6d71plvt1d4g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kyle.huemongous",
+            "certificate_hash": "c1a6ca142a4e45a1eeb532627ec161f74c0c7cc7"
+          }
+        },
+        {
+          "client_id": "639667016935-q4b1435a63pn0po6oekfdj4aokvc073m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpqriqdYPx0xtD9KfsXQYHGCcKaEUn-Dc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "639667016935-q4b1435a63pn0po6oekfdj4aokvc073m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
