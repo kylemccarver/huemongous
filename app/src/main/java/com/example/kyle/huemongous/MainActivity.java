@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -41,6 +43,14 @@ public class MainActivity extends AppCompatActivity {
                             .build(),
                     RC_SIGN_IN);
         }
+
+        // Palette List setup
+        RecyclerView paletteList = (RecyclerView) findViewById(R.id.paletteList);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        paletteList.setLayoutManager(layoutManager);
+
+        RecyclerView.Adapter adapter = new PaletteAdapter(getApplicationContext());
+        paletteList.setAdapter(adapter);
     }
 
     @Override
