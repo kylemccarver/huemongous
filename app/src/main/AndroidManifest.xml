@@ -16,6 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".NewPalette"
+            android:label="New Palette"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".MixingActivity"
+            android:label="Mixing Recipe"
+            android:parentActivityName=".MixingActivity"></activity>
     </application>
 
 </manifest>

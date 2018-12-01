@@ -2,10 +2,13 @@ package com.example.kyle.huemongous;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -49,14 +52,24 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         paletteList.setLayoutManager(layoutManager);
 
-        RecyclerView.Adapter adapter = new PaletteAdapter(getApplicationContext());
+        RecyclerView.Adapter adapter = new PaletteAdapter(this);
         paletteList.setAdapter(adapter);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), NewPalette.class);
+                final int resultCode = 1;
+                startActivityForResult(intent, resultCode);
+            }
+        });
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-
+        /*
         AuthUI.getInstance()
                 .signOut(this)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -64,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                         // ...
                     }
                 });
+                */
     }
 
     @Override
@@ -83,6 +97,15 @@ public class MainActivity extends AppCompatActivity {
                 // response.getError().getErrorCode() and handle the error.
                 // ...
             }
+        }
+
+        else if(requestCode == 1)
+        {
+            Log.d("oh", "returned successfully");
+        }
+        else if(requestCode == 2)
+        {
+            Log.d("mixing", "returned");
         }
     }
 }

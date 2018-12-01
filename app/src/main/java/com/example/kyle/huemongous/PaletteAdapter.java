@@ -1,14 +1,14 @@
 package com.example.kyle.huemongous;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -41,6 +41,8 @@ public class PaletteAdapter extends RecyclerView.Adapter<PaletteAdapter.ViewHold
                 @Override
                 public void onClick(View view) {
                     // Perform transition to color mixing activity
+                    Intent intent = new Intent(mContext, MixingActivity.class);
+                    ((Activity)mContext).startActivityForResult(intent, 2);
                 }
             });
         }
