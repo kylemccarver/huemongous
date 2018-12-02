@@ -2,6 +2,11 @@ package com.example.kyle.huemongous;
 
 public class Palette {
 
-    private String name;
+    public String name;
+    private ColorDict.ColorName[] colors;
 
+    public Palette(String n)
+    {
+        name = n;
+    }
 }
