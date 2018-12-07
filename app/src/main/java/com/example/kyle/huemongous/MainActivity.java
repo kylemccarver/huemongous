@@ -29,9 +29,12 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+
+    // Request codes
     private final int RC_SIGN_IN = 123;
     private final int NEW_PALETTE = 1;
     private final int MIXING = 2;
+
     private Context mContext;
 
     @Override

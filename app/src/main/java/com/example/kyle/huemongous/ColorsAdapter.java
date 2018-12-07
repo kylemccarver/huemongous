@@ -17,22 +17,27 @@ import java.util.ArrayList;
 public class ColorsAdapter extends RecyclerView.Adapter<ColorsAdapter.ViewHolder> {
     private Context mContext;
     private ArrayList<ColorDict.ColorName> mData;
+    private ColorsAdapter other;
+    private boolean isAvailableList;
 
     public ColorsAdapter(Context context)
     {
         mContext = context;
         mData = new ArrayList<>();
-        mData.add(ColorDict.dict[0]);
+        other = null;
+        isAvailableList = false;
     }
 
-    public ColorsAdapter(Context context, ColorDict.ColorName[] data)
+    public ColorsAdapter(Context context, ColorDict.ColorName[] data, boolean isAvailableList, RecyclerView.Adapter other)
     {
         mContext = context;
         mData = new ArrayList<>(data.length);
+        this.isAvailableList = isAvailableList;
         for(ColorDict.ColorName s : data)
         {
             mData.add(s);
         }
+        this.other = (ColorsAdapter) other;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder
@@ -46,6 +51,24 @@ public class ColorsAdapter extends RecyclerView.Adapter<ColorsAdapter.ViewHolder
 
             // TODO: init elements of cell
             textView = view.findViewById(R.id.paletteTextView);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if(isAvailableList && other != null)
+                    {
+                        if(!other.hasColor(mData.get(position).color))
+                        {
+                            other.addColor(mData.get(position));
+                        }
+                    }
+                    else
+                    {
+                        removeColor(mData.get(position));
+                    }
+                }
+            });
         }
     }
 
@@ -94,5 +117,44 @@ public class ColorsAdapter extends RecyclerView.Adapter<ColorsAdapter.ViewHolder
     public void addColor(ColorDict.ColorName color)
     {
         mData.add(color);
+        notifyDataSetChanged();
+    }
+
+    public boolean hasColor(int color)
+    {
+        for(int i = 0; i < mData.size(); ++i)
+        {
+            if(mData.get(i).color == color)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void removeColor(ColorDict.ColorName color)
+    {
+        for(int i = 0; i < mData.size(); ++i)
+        {
+            if(mData.get(i).color == color.color)
+            {
+                mData.remove(i);
+                notifyDataSetChanged();
+                break;
+            }
+        }
+    }
+
+    public void addToOther(ColorDict.ColorName color)
+    {
+        if(other != null)
+        {
+            other.addColor(color);
+        }
+    }
+
+    public void setOther(RecyclerView.Adapter o)
+    {
+        other = (ColorsAdapter) o;
     }
 }

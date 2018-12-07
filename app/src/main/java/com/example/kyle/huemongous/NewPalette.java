@@ -44,9 +44,9 @@ public class NewPalette extends AppCompatActivity {
         availableColors = (RecyclerView) findViewById(R.id.availableColors);
         availableColors.setLayoutManager(availableLayoutManager);
 
-        RecyclerView.Adapter availableAdapter = new ColorsAdapter(this, ColorDict.dict);
+        RecyclerView.Adapter availableAdapter = new ColorsAdapter(this, ColorDict.dict, true, selectedAdapter);
         availableColors.setAdapter(availableAdapter);
-        
+
         paletteNameEdit = (EditText) findViewById(R.id.paletteNameEdit);
 
     }
