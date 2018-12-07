@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private FirebaseAuth mAuth;
     private Auth auth;
+    private Firestore firestore;
     public static String TAG = "HUE";
 
     // Request codes
@@ -57,8 +58,9 @@ public class MainActivity extends AppCompatActivity implements
         auth.init(this, this);
         ProcessLifecycleOwner.get().getLifecycle().addObserver(auth);
 
-        Log.d(TAG, auth.getUid());
-
+        firestore = Firestore.getInstance();
+        firestore.init(auth);
+        /*
         FirebaseUser user = mAuth.getCurrentUser();
         if(user == null)
         {
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements
                             .build(),
                     RC_SIGN_IN);
         }
-
+        */
         // Palette List setup
         RecyclerView paletteList = (RecyclerView) findViewById(R.id.paletteList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);

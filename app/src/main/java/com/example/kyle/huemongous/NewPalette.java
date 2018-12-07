@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.UUID;
+
 public class NewPalette extends AppCompatActivity {
 
     private RecyclerView selectedColors;
@@ -72,9 +74,10 @@ public class NewPalette extends AppCompatActivity {
                 else
                 {
                     // Save
+                    String paletteId = UUID.randomUUID().toString();
                     ColorDict.ColorName[] colors = ((ColorsAdapter) selectedAdapter).getColorsArray();
-                    Palette palette = new Palette(Auth.getInstance().getUid(), paletteNameEdit.getText().toString(), colors);
-                    
+                    Palette palette = new Palette(Auth.getInstance().getUid(), paletteId, paletteNameEdit.getText().toString(), colors);
+                    Firestore.getInstance().savePalette(palette);
                     setResult(RESULT_OK);
                     finish();
                 }

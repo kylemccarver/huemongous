@@ -22,7 +22,7 @@ public class PaletteAdapter extends RecyclerView.Adapter<PaletteAdapter.ViewHold
     {
         mContext = context;
         mData = new ArrayList<>();
-        mData.add(new Palette(Auth.getInstance().getUid(), "test", new ColorDict.ColorName[0]));
+        //mData.add(new Palette(Auth.getInstance().getUid(), "test", new ColorDict.ColorName[0]));
     }
 
     public PaletteAdapter(Context context, ArrayList<Palette> data)
