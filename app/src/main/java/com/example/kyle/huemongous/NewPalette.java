@@ -19,9 +19,11 @@ import android.widget.Toast;
 
 public class NewPalette extends AppCompatActivity {
 
-    RecyclerView selectedColors;
-    RecyclerView availableColors;
-    EditText paletteNameEdit;
+    private RecyclerView selectedColors;
+    private RecyclerView availableColors;
+    private EditText paletteNameEdit;
+    private RecyclerView.Adapter selectedAdapter;
+    private RecyclerView.Adapter availableAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,13 +40,13 @@ public class NewPalette extends AppCompatActivity {
         selectedColors = (RecyclerView) findViewById(R.id.selectedColors);
         selectedColors.setLayoutManager(selectedLayoutManager);
 
-        RecyclerView.Adapter selectedAdapter = new ColorsAdapter(this);
+        selectedAdapter = new ColorsAdapter(this);
         selectedColors.setAdapter(selectedAdapter);
 
         availableColors = (RecyclerView) findViewById(R.id.availableColors);
         availableColors.setLayoutManager(availableLayoutManager);
 
-        RecyclerView.Adapter availableAdapter = new ColorsAdapter(this, ColorDict.dict, true, selectedAdapter);
+        availableAdapter = new ColorsAdapter(this, ColorDict.dict, true, selectedAdapter);
         availableColors.setAdapter(availableAdapter);
 
         paletteNameEdit = (EditText) findViewById(R.id.paletteNameEdit);
@@ -63,13 +65,16 @@ public class NewPalette extends AppCompatActivity {
         {
             case R.id.palette_save:
                 // Save palette
-                if(paletteNameEdit.getText().toString() == null || paletteNameEdit.getText().toString().equals(""))
+                if(paletteNameEdit.getText().toString() == null || paletteNameEdit.getText().toString().equals("") || selectedAdapter.getItemCount() == 0)
                 {
                     Toast.makeText(this, "Missing information!", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
                     // Save
+                    ColorDict.ColorName[] colors = ((ColorsAdapter) selectedAdapter).getColorsArray();
+                    Palette palette = new Palette(Auth.getInstance().getUid(), paletteNameEdit.getText().toString(), colors);
+                    
                     setResult(RESULT_OK);
                     finish();
                 }

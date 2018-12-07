@@ -1,6 +1,7 @@
 package com.example.kyle.huemongous;
 
 import android.app.Activity;
+import android.arch.lifecycle.ProcessLifecycleOwner;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -26,9 +27,12 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements
+        FirebaseAuth.AuthStateListener {
 
     private FirebaseAuth mAuth;
+    private Auth auth;
+    public static String TAG = "HUE";
 
     // Request codes
     private final int RC_SIGN_IN = 123;
@@ -48,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
         mContext = this;
 
         mAuth = FirebaseAuth.getInstance();
+
+        auth = Auth.getInstance();
+        auth.init(this, this);
+        ProcessLifecycleOwner.get().getLifecycle().addObserver(auth);
+
+        Log.d(TAG, auth.getUid());
 
         FirebaseUser user = mAuth.getCurrentUser();
         if(user == null)
@@ -154,6 +164,11 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+
+    }
+
+    @Override
+    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
     }
 }

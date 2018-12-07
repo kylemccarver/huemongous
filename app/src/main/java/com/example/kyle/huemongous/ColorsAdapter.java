@@ -120,6 +120,22 @@ public class ColorsAdapter extends RecyclerView.Adapter<ColorsAdapter.ViewHolder
         notifyDataSetChanged();
     }
 
+    public ColorDict.ColorName getColor(int position)
+    {
+        return mData.get(position);
+    }
+
+    public ColorDict.ColorName[] getColorsArray()
+    {
+        ColorDict.ColorName[] colors = new ColorDict.ColorName[mData.size()];
+        for(int i = 0; i < colors.length; ++i)
+        {
+            colors[i] = mData.get(i);
+        }
+
+        return colors;
+    }
+
     public boolean hasColor(int color)
     {
         for(int i = 0; i < mData.size(); ++i)
