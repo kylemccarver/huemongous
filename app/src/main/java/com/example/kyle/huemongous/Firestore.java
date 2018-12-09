@@ -38,11 +38,20 @@ public class Firestore {
 
     void savePalette(Palette palette) {
         Log.d(MainActivity.TAG,
-                String.format("savePhoto uid: %s %s",
+                String.format("savePalette uid: %s %s",
                         palette.getUidOwner(),
                         palette.getName()));
         // XXX Write me
         getInstance().db.collection("users").document(palette.getUidOwner()).collection("palettes").document(palette.getPaletteId()).set(palette);
+    }
+
+    void deletePalette(Palette palette) {
+        Log.d(MainActivity.TAG,
+                String.format("deletePalette uid: %s %s",
+                        palette.getUidOwner(),
+                        palette.getName()));
+
+        getInstance().db.collection("users").document(palette.getUidOwner()).collection("palettes").document(palette.getPaletteId()).delete();
     }
 /*
     void saveComment(Comment comment) {

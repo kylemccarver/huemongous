@@ -54,31 +54,13 @@ public class MainActivity extends AppCompatActivity implements
 
         mContext = this;
 
-        mAuth = FirebaseAuth.getInstance();
-
         auth = Auth.getInstance();
         auth.init(this, this);
         ProcessLifecycleOwner.get().getLifecycle().addObserver(auth);
 
         firestore = Firestore.getInstance();
         firestore.init(auth);
-        /*
-        FirebaseUser user = mAuth.getCurrentUser();
-        if(user == null)
-        {
-            // Choose authentication providers
-            List<AuthUI.IdpConfig> providers = Arrays.asList(
-                    new AuthUI.IdpConfig.EmailBuilder().build());
 
-            // Create and launch sign-in intent
-            startActivityForResult(
-                    AuthUI.getInstance()
-                            .createSignInIntentBuilder()
-                            .setAvailableProviders(providers)
-                            .build(),
-                    RC_SIGN_IN);
-        }
-        */
         // Palette List setup
         paletteList = (RecyclerView) findViewById(R.id.paletteList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -150,21 +132,7 @@ public class MainActivity extends AppCompatActivity implements
         {
             case R.id.signout:
                 AuthUI.getInstance()
-                        .signOut(this)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            public void onComplete(@NonNull Task<Void> task) {
-                                List<AuthUI.IdpConfig> providers = Arrays.asList(
-                                        new AuthUI.IdpConfig.EmailBuilder().build());
-
-                                // Create and launch sign-in intent
-                                startActivityForResult(
-                                        AuthUI.getInstance()
-                                                .createSignInIntentBuilder()
-                                                .setAvailableProviders(providers)
-                                                .build(),
-                                        RC_SIGN_IN);
-                            }
-                        });
+                        .signOut(this);
             default:
                 return super.onOptionsItemSelected(item);
         }
