@@ -2,11 +2,16 @@ package com.example.kyle.huemongous;
 
 import android.graphics.Color;
 
+import java.io.Serializable;
+
 public class ColorDict {
-    static class ColorName
+    static class ColorName implements Serializable
     {
         int color;
         String name;
+
+        ColorName() {}
+
         ColorName(int i, String s)
         {
             this.color = Color.rgb(((i>>16)&0xFF),((i>>8)&0xFF), (i&0xFF));

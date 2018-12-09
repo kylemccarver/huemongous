@@ -5,36 +5,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+
 import java.util.ArrayList;
 
-public class PaletteAdapter extends RecyclerView.Adapter<PaletteAdapter.ViewHolder>
+public class PaletteAdapter extends FirestoreRecyclerAdapter<Palette, PaletteAdapter.ViewHolder>
 {
-    private Context mContext;
-    private ArrayList<Palette> mData;
-
-    public PaletteAdapter(Context context)
-    {
-        mContext = context;
-        mData = new ArrayList<>();
-        //mData.add(new Palette(Auth.getInstance().getUid(), "test", new ColorDict.ColorName[0]));
-    }
-
-    public PaletteAdapter(Context context, ArrayList<Palette> data)
-    {
-        mContext = context;
-        mData = new ArrayList<>(data.size());
-        for(Palette s : data)
-        {
-            mData.add(s);
-        }
-    }
-
     public class ViewHolder extends RecyclerView.ViewHolder
     {
         // Elements of each cell listed here:
@@ -51,31 +35,30 @@ public class PaletteAdapter extends RecyclerView.Adapter<PaletteAdapter.ViewHold
                 @Override
                 public void onClick(View view) {
                     // Perform transition to color mixing activity
-                    Intent intent = new Intent(mContext, MixingActivity.class);
-                    ((Activity)mContext).startActivityForResult(intent, 2);
+                    Palette thisPalette = getItem(getAdapterPosition());
+
+                    Intent intent = new Intent(view.getContext(), MixingActivity.class);
+                    intent.putExtra("palette", thisPalette);
+                    ((Activity)view.getContext()).startActivityForResult(intent, 2);
                 }
             });
         }
     }
 
+    PaletteAdapter(@NonNull FirestoreRecyclerOptions<Palette> options) {
+        super(options);
+    }
+
+    @Override
+    protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Palette model) {
+        holder.textView.setText(model.getName());
+    }
+
     @NonNull
     @Override
-    public PaletteAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //TODO: make layout for cell
-        View v = LayoutInflater.from(mContext).inflate(R.layout.palettelist_row, parent, false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.palettelist_row, parent, false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position)
-    {
-        //TODO: set data
-        holder.textView.setText(mData.get(position).name);
-    }
-
-    @Override
-    public int getItemCount() {
-        return mData.size();
     }
 }

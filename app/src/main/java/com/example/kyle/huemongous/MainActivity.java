@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements
     private Auth auth;
     private Firestore firestore;
     public static String TAG = "HUE";
+    private RecyclerView paletteList;
 
     // Request codes
     private final int RC_SIGN_IN = 123;
@@ -78,12 +80,12 @@ public class MainActivity extends AppCompatActivity implements
         }
         */
         // Palette List setup
-        RecyclerView paletteList = (RecyclerView) findViewById(R.id.paletteList);
+        paletteList = (RecyclerView) findViewById(R.id.paletteList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         paletteList.setLayoutManager(layoutManager);
 
-        RecyclerView.Adapter adapter = new PaletteAdapter(this);
-        paletteList.setAdapter(adapter);
+        //RecyclerView.Adapter adapter = new PaletteAdapter(this);
+        //paletteList.setAdapter(adapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -171,6 +173,18 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
+        if ( auth.signedIn() ) {
+            // User is signed in
+            //updateDisplayUserProfile();
+            Log.d(MainActivity.TAG, String.format("%s/%s/%s is signed in",
+                    auth.getDisplayName(),
+                    auth.getEmail(),
+                    auth.getUid()));
+            FirestoreRecyclerOptions<Palette> options = new FirestoreRecyclerOptions.Builder<Palette>()
+                    .setQuery(firestore.getPaletteQuery(), Palette.class)
+                    .setLifecycleOwner(this)
+                    .build();
+            paletteList.setAdapter(new PaletteAdapter(options));
+        }
     }
 }

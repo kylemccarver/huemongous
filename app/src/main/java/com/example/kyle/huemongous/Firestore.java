@@ -40,7 +40,7 @@ public class Firestore {
         Log.d(MainActivity.TAG,
                 String.format("savePhoto uid: %s %s",
                         palette.getUidOwner(),
-                        palette.name));
+                        palette.getName()));
         // XXX Write me
         getInstance().db.collection("users").document(palette.getUidOwner()).collection("palettes").document(palette.getPaletteId()).set(palette);
     }
