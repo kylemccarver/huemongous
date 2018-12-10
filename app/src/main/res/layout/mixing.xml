@@ -23,9 +23,10 @@
         android:layout_height="120dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Color Picker"
+        android:text="Color Mixer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mixingActivityToolbar" />
+        app:layout_constraintTop_toBottomOf="@id/mixingActivityToolbar"
+        android:onClick="colorPickerClicked"/>
 
     <TextView
         android:id="@+id/textView3"
@@ -62,12 +63,27 @@
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/recipe"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Mixing Recipe Instrucitons"
+        android:layout_marginBottom="8dp"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/saveColor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <Button
+        android:id="@+id/saveColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

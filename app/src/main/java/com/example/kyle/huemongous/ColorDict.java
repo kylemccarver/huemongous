@@ -8,14 +8,25 @@ public class ColorDict {
     static class ColorName implements Serializable
     {
         int color;
+        int r;
+        int g;
+        int b;
         String name;
 
         ColorName() {}
 
         ColorName(int i, String s)
         {
-            this.color = Color.rgb(((i>>16)&0xFF),((i>>8)&0xFF), (i&0xFF));
+            r = (i>>16)&0xFF;
+            g = (i>>8)&0xFF;
+            b = (i&0xFF);
+            this.color = Color.rgb(r,g, b);
             this.name = s;
+        }
+
+        ColorName(int r, int g, int b, String s)
+        {
+            this.color = Color.rgb(r, g, b);
         }
     }
 
@@ -25,6 +36,7 @@ public class ColorDict {
             new ColorName(0xfff600, "Cadmium Yellow"),
             new ColorName(0xE9D66B, "Hansa Yellow Light"),
             new ColorName(0xfff7ff, "Titanium White"),
-            new ColorName(0x28272a, "Ivory Black")
+            new ColorName(0x28272a, "Ivory Black"),
+            new ColorName(0x463836, "Burnt Umber")
     };
 }

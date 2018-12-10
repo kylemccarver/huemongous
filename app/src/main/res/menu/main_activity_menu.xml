@@ -4,4 +4,8 @@
     <item android:id="@+id/signout"
         android:title="Sign Out"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/recipes"
+        android:title="View saved recipes"
+        app:showAsAction="ifRoom" />
 </menu>

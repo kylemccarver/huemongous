@@ -45,6 +45,15 @@ public class Firestore {
         getInstance().db.collection("users").document(palette.getUidOwner()).collection("palettes").document(palette.getPaletteId()).set(palette);
     }
 
+    void saveColor(ColorFirestore color) {
+        Log.d(MainActivity.TAG,
+                String.format("savePalette uid: %s %s",
+                        color.getUidOwner(),
+                        color.getPaletteId()));
+        // XXX Write me
+        getInstance().db.collection("users").document(color.getUidOwner()).collection("recipes").document(color.getColorId()).set(color);
+    }
+
     void deletePalette(Palette palette) {
         Log.d(MainActivity.TAG,
                 String.format("deletePalette uid: %s %s",
@@ -53,17 +62,15 @@ public class Firestore {
 
         getInstance().db.collection("users").document(palette.getUidOwner()).collection("palettes").document(palette.getPaletteId()).delete();
     }
-/*
-    void saveComment(Comment comment) {
+
+    void deleteColor(ColorFirestore color) {
         Log.d(MainActivity.TAG,
-                String.format("saveComment uid: %s %s %s",
-                        comment.getUidOwner(),
-                        comment.getPhotoId(),
-                        comment.getComment()));
+                String.format("savePalette uid: %s %s",
+                        color.getUidOwner(),
+                        color.getPaletteId()));
         // XXX Write me
-        getInstance().db.collection("comments").document(comment.getPhotoId()).collection("comments").document(comment.getUidOwner()).set(comment);
+        getInstance().db.collection("users").document(color.getUidOwner()).collection("recipes").document(color.getColorId()).delete();
     }
-    */
 
     Query getPaletteQuery() {
         Query query = null;
@@ -72,14 +79,13 @@ public class Firestore {
         query = colRef.whereEqualTo("uidOwner", getInstance().auth.getUid());
         return query;
     }
-/*
-    Query getCommentQuery(PhotoObject photoObject) {
+
+    Query getColorQuery() {
         Query query = null;
         // XXX Write me and the query shouldn't stay null
-        CollectionReference colRef = db.collection("comments").document(photoObject.getPhotoId()).collection("comments");
-        query = colRef.whereEqualTo("photoId", photoObject.getPhotoId());
+        CollectionReference colRef = db.collection("users").document(getInstance().auth.getUid()).collection("recipes");
+        query = colRef.whereEqualTo("uidOwner", getInstance().auth.getUid());
         return query;
     }
-    */
 }
 

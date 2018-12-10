@@ -107,14 +107,12 @@ public class MainActivity extends AppCompatActivity implements
         {
             if(resultCode == RESULT_OK)
             {
-                Toast.makeText(this, "returned from new palette", Toast.LENGTH_SHORT).show();
             }
         }
         else if(requestCode == MIXING)
         {
             if(resultCode == RESULT_OK)
             {
-                Toast.makeText(this, "returned from mixing", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -133,6 +131,8 @@ public class MainActivity extends AppCompatActivity implements
             case R.id.signout:
                 AuthUI.getInstance()
                         .signOut(this);
+            case R.id.recipes:
+                // Go to recipes view
             default:
                 return super.onOptionsItemSelected(item);
         }
