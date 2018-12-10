@@ -31,8 +31,10 @@ public class MixingActivity extends AppCompatActivity {
     private TextView recipeText;
     private Button button;
     private Button save;
+    private Button clear;
     private ColorDict.ColorName mixedColor;
     private String saveRecipe;
+    private TextView colorInfo;
 
     private final int C_PICKER = 3;
 
@@ -56,6 +58,14 @@ public class MixingActivity extends AppCompatActivity {
 
         // Color picker button
         button = (Button) findViewById(R.id.button);
+
+        clear = (Button) findViewById(R.id.button2);
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clear();
+            }
+        });
 
         save = (Button) findViewById(R.id.saveColor);
         save.setOnClickListener(new View.OnClickListener() {

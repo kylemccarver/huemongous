@@ -84,7 +84,7 @@ public class Firestore {
         Query query = null;
         // XXX Write me and the query shouldn't stay null
         CollectionReference colRef = db.collection("users").document(getInstance().auth.getUid()).collection("recipes");
-        query = colRef.whereEqualTo("uidOwner", getInstance().auth.getUid());
+        //query = colRef.whereEqualTo("uidOwner", getInstance().auth.getUid());
         return query;
     }
 }

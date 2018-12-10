@@ -29,6 +29,10 @@
             android:name=".ColorPickerActivity"
             android:label="Color Mixer"
             android:parentActivityName=".ColorPickerActivity" />
+        <activity
+            android:name=".ViewRecipesActivity"
+            android:label="Recipes"
+            android:parentActivityName=".ViewRecipesActivity" />
     </application>
 
 </manifest>

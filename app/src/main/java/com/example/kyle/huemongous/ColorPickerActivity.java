@@ -148,7 +148,8 @@ public class ColorPickerActivity extends AppCompatActivity {
 
         for (Map.Entry<ColorDict.ColorName, Integer> entry : state.entrySet())
         {
-            float part = entry.getValue() / min;
+            float part = entry.getValue() / (float)min;
+            part = Math.round(part);
 
             if(part > 0.0f)
                 recipe += part + " part(s) " + entry.getKey().name + "\n";

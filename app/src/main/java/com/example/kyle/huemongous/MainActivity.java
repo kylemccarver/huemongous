@@ -66,9 +66,6 @@ public class MainActivity extends AppCompatActivity implements
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         paletteList.setLayoutManager(layoutManager);
 
-        //RecyclerView.Adapter adapter = new PaletteAdapter(this);
-        //paletteList.setAdapter(adapter);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +130,8 @@ public class MainActivity extends AppCompatActivity implements
                         .signOut(this);
             case R.id.recipes:
                 // Go to recipes view
+                Intent recipesIntent = new Intent(this, ViewRecipesActivity.class);
+                startActivity(recipesIntent);
             default:
                 return super.onOptionsItemSelected(item);
         }
